@@ -1,9 +1,7 @@
 package com.mcmasters.notecards.mocks;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "User")
@@ -22,27 +20,28 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "deck")
-    private ArrayList<Deck> decks;
+    @OneToMany
+    @JoinColumn(name = "deck_id")
+    private Set<Deck> decks;
 
-    @Column(name = "badges")
-    private ArrayList<String> badges;
+    @Column(name = "badge")
+    //private Set<String> badges;
+    private String badge;
 
     @Column(name = "loggedOn")
     private boolean loggedOn = false;
 
 
     public User() {
-        decks = new ArrayList<Deck>();
-        badges = new ArrayList<String>();
+        decks = new HashSet<>();
     }
 
-    public User(String userName, String encryptedPswd, String email, ArrayList<Deck> decks, ArrayList<String> badges) {
+    public User(String userName, String encryptedPswd, String email, Set<Deck> decks, String badge) {
         this.userName = userName;
         this.encryptedPswd = encryptedPswd;
         this.email = email;
         this.decks = decks;
-        this.badges = badges;
+        this.badge = badge;
     }
 
     public long getId() {
@@ -77,11 +76,11 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<Deck> getDecks() {
+    public Set<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(ArrayList<Deck> decks) {
+    public void setDecks(Set<Deck> decks) {
         this.decks = decks;
     }
 
@@ -90,14 +89,6 @@ public class User {
         for (Deck d : newDecks) {
             decks.add(d);
         }
-    }
-
-    public ArrayList<String> getBadges() {
-        return badges;
-    }
-
-    public void setBadges(ArrayList<String> badges) {
-        this.badges = badges;
     }
 
     public boolean isLoggedOn() {

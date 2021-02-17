@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getSampleUser() {
-        User user = new User("ano", "money99", "brokebois@yahoo.net", new ArrayList<Deck>(), new ArrayList<String>());
+        User user = new User("ano", "money99", "brokebois@yahoo.net", new HashSet(), "badge1");
         userRepository.save(user);
         return user;
     }

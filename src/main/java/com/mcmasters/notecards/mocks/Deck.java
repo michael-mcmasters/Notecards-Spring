@@ -12,6 +12,9 @@ public class Deck {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @ManyToOne
+    private User user;
+
     @Column(name = "category")
     private String category;
 
