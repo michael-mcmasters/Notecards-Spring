@@ -14,9 +14,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+//    @GetMapping("/login")
+//    public ResponseEntity<User> LogIn(String username, String password) {
+//        return "yes!"
+//    }
+
     @GetMapping("/login")
-    public ResponseEntity<User> LogIn(String username, String password) {
-        return null;
+    public String LogIn(String username, String password) {
+        return "yes!";
     }
+
+
 
 }

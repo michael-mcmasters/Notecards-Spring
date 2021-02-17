@@ -1,6 +1,7 @@
 package com.mcmasters.notecards.mocks;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,10 +22,10 @@ public class User {
     private String email;
 
     @Column(name = "deck")
-    private List<Deck> decks;
+    private ArrayList<Deck> decks;
 
     @Column(name = "badges")
-    private List<String> badges;
+    private ArrayList<String> badges;
 
     @Column(name = "loggedOn")
     private boolean loggedOn = false;
@@ -32,11 +33,11 @@ public class User {
 
     public User() {}
 
-    public User(String userName, String encryptedPswd, String email, List<Deck> decks, List<String> badges) {
+    public User(String userName, String encryptedPswd, String email, ArrayList<Deck> decks, ArrayList<String> badges) {
         this(1L, userName, encryptedPswd, email, decks, badges);
     }
 
-    public User(long id, String userName, String encryptedPswd, String email, List<Deck> decks, List<String> badges) {
+    public User(long id, String userName, String encryptedPswd, String email, ArrayList<Deck> decks, ArrayList<String> badges) {
         this.id = id;
         this.userName = userName;
         this.encryptedPswd = encryptedPswd;
@@ -77,19 +78,19 @@ public class User {
         this.email = email;
     }
 
-    public List<Deck> getDecks() {
+    public ArrayList<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(List<Deck> decks) {
+    public void setDecks(ArrayList<Deck> decks) {
         this.decks = decks;
     }
 
-    public List<String> getBadges() {
+    public ArrayList<String> getBadges() {
         return badges;
     }
 
-    public void setBadges(List<String> badges) {
+    public void setBadges(ArrayList<String> badges) {
         this.badges = badges;
     }
 
