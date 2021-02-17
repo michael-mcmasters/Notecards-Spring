@@ -26,6 +26,9 @@ public class User {
     @Column(name = "badges")
     private List<String> badges;
 
+    @Column(name = "loggedOn")
+    private boolean loggedOn = false;
+
 
     public User() {}
 
@@ -88,5 +91,13 @@ public class User {
 
     public void setBadges(List<String> badges) {
         this.badges = badges;
+    }
+
+    public boolean isLoggedOn() {
+        return loggedOn;
+    }
+
+    public void setLoggedOn(boolean loggedOn) {
+        this.loggedOn = loggedOn;
     }
 }
