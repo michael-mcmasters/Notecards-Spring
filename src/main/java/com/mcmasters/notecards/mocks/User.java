@@ -34,11 +34,6 @@ public class User {
     public User() {}
 
     public User(String userName, String encryptedPswd, String email, ArrayList<Deck> decks, ArrayList<String> badges) {
-        this(1L, userName, encryptedPswd, email, decks, badges);
-    }
-
-    public User(long id, String userName, String encryptedPswd, String email, ArrayList<Deck> decks, ArrayList<String> badges) {
-        this.id = id;
         this.userName = userName;
         this.encryptedPswd = encryptedPswd;
         this.email = email;
