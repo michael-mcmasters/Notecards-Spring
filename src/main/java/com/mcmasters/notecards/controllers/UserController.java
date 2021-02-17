@@ -1,5 +1,7 @@
 package com.mcmasters.notecards.controllers;
 
+import com.mcmasters.notecards.mocks.Card;
+import com.mcmasters.notecards.mocks.Deck;
 import com.mcmasters.notecards.mocks.User;
 import com.mcmasters.notecards.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/login")
+    @GetMapping("/getsampleuser")
     public ResponseEntity<User> LogIn(String username, String password) {
-        //return "yes!";
-
-        //return null;
-
         return ResponseEntity.ok().body(userService.getSampleUser());
     }
+
+//    @GetMapping("user/{id}/cards")
+//    public ResponseEntity<User> getUserCard() {
 //
-//    @GetMapping("/login")
-//    public String LogIn(String username, String password) {
-//        return "yes!";
 //    }
+
+    @GetMapping("/decks")
+    public ResponseEntity<Deck> getUserDecks() {
+        return ResponseEntity.ok().body(userService.getUsersDecks());
+    }
+
+    @GetMapping("/cards")
+    public ResponseEntity<Card> getUserCard() {
+//         return ResponseEntity.ok().body(userService.getUsersCards());
+         return ResponseEntity.ok().body(userService.getUsersCards());
+    }
 }

@@ -1,5 +1,6 @@
 package com.mcmasters.notecards.mocks;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +16,14 @@ public class Card {
 
     @ManyToOne
     private Deck deck;
+
+    public Card() {}
+
+    public Card(String frontText, String backText, Deck deck) {
+        this.frontText = frontText;
+        this.backText = backText;
+        this.deck = deck;
+    }
 
     public long getId() {
         return id;

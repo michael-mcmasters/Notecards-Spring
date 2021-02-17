@@ -2,6 +2,7 @@ package com.mcmasters.notecards.mocks;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,10 @@ public class User {
     private boolean loggedOn = false;
 
 
-    public User() {}
+    public User() {
+        decks = new ArrayList<Deck>();
+        badges = new ArrayList<String>();
+    }
 
     public User(String userName, String encryptedPswd, String email, ArrayList<Deck> decks, ArrayList<String> badges) {
         this.userName = userName;
@@ -79,6 +83,13 @@ public class User {
 
     public void setDecks(ArrayList<Deck> decks) {
         this.decks = decks;
+    }
+
+    public void addDeck(Deck... newDecks) {
+//        Collections.addAll(decks, newDecks);
+        for (Deck d : newDecks) {
+            decks.add(d);
+        }
     }
 
     public ArrayList<String> getBadges() {
