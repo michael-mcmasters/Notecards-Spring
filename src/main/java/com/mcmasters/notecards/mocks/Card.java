@@ -2,7 +2,6 @@ package com.mcmasters.notecards.mocks;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -13,8 +12,10 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(name= "frontText", columnDefinition="LONGTEXT")
     private String frontText;
 
+    @Column(name = "backText", columnDefinition="LONGTEXT" )
     private String backText;
 
     @ManyToOne

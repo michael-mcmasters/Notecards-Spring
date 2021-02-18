@@ -34,7 +34,6 @@ public class UserController {
 
     @GetMapping("/cards")
     public ResponseEntity<Set<Card>> getUserCard() {
-//         return ResponseEntity.ok().body(userService.getUsersCards());
          return ResponseEntity.ok().body(userService.getUsersCards());
     }
 }

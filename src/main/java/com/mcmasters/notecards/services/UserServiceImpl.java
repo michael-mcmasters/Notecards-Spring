@@ -32,20 +32,36 @@ public class UserServiceImpl implements UserService {
         return new Deck();
     }
 
+//    {
+//        "backgroundColor": "#31587A",
+//            "frontText": "What are the 4 principles of Object Oriented Programming?",
+//            "backText": "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation",
+//            "timesAccepted": "0"
+//    },
+//    {
+//        "backgroundColor": "#E8525B",
+//            "frontText": "Explain abstraction",
+//            "backText": "Abstraction means using simple things to represent complexity. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets us avoid repeating the same work multiple times. It handles complexity by hiding unnecessary details from the user",
+//            "timesAccepted": "0"
+//    },
+//    {
+//        "backgroundColor": "#E8525B",
+//            "frontText": "Explain polymorphism",
+//            "backText": "SAME NAME, MANY FORMS. This Java OOP concept lets programmers use the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables. TWO TYPES: Runtime , Polymorphism handled during runtime: example (Overriding) Static , Polymorphism handled in the compiler: example (Overloading)",
+//            "timesAccepted": "0"
+//    },
+
     @Override
     public Set<Card> getUsersCards() {
         Deck deck = new Deck();
-        deck.addCards(new Card("first card front!", "back of card!", deck));
-        deck.addCards(new Card("second card front!", "back of card!", deck));
-        deck.addCards(new Card("third card front!", "back of card!", deck));
+        deck.addCards(new Card("What are the 4 principles of Object Oriented Programming?", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation", deck));
+        deck.addCards(new Card("Explain abstraction", "Abstraction means using simple things to represent complexity. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets us avoid repeating the same work multiple times. It handles complexity by hiding unnecessary details from the user", deck));
+        deck.addCards(new Card("Explain polymorphism", "SAME NAME, MANY FORMS. This Java OOP concept lets programmers use the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables. TWO TYPES: Runtime , Polymorphism handled during runtime: example (Overriding) Static , Polymorphism handled in the compiler: example (Overloading)", deck));
 
         User user = getSampleUser();
         user.addDeck(deck);
 
-        //userRepository.save(user);
+        userRepository.save(user);
         return deck.getCards();
-        //return deck.getCards().iterator().next();
-
-        //return new Card("first card front!", "back of card!", new Deck());
     }
 }
