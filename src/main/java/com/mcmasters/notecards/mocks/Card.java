@@ -1,12 +1,12 @@
 package com.mcmasters.notecards.mocks;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
-@JsonIgnoreProperties
 public class Card {
 
     @Id
@@ -18,7 +18,7 @@ public class Card {
     private String backText;
 
     @ManyToOne
-    @JsonIgnoreProperties("cards")
+    @JsonBackReference
     private Deck deck;
 
     public Card() {}

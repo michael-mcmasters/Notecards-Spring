@@ -1,5 +1,6 @@
 package com.mcmasters.notecards.mocks;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -7,7 +8,6 @@ import java.util.*;
 
 @Entity
 @Table(name = "User")
-@JsonIgnoreProperties
 public class User {
 
     @Id
@@ -25,7 +25,7 @@ public class User {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "deck_id")
-    @JsonIgnoreProperties("user")
+    @JsonBackReference
     private Set<Deck> decks;
 
     @Column(name = "badge")
