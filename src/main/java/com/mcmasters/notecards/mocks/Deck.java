@@ -17,6 +17,10 @@ public class Deck {
 
     @ManyToOne
     @JsonBackReference
+    private Homepage homepage;
+
+    @ManyToOne
+    @JsonBackReference
     private User user;
 
     @Column(name = "category")
@@ -52,6 +56,22 @@ public class Deck {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Homepage getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(Homepage homepage) {
+        this.homepage = homepage;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getCategory() {

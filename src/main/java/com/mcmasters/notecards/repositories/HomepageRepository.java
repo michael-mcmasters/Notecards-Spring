@@ -1,8 +1,9 @@
 package com.mcmasters.notecards.repositories;
 
-import com.mcmasters.notecards.mocks.HomePage;
+import com.mcmasters.notecards.mocks.Homepage;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-
-public interface HomepageRepository extends CrudRepository<HomePage, Long> {
+@Repository
+public interface HomepageRepository extends CrudRepository<Homepage, Long> {
 }
