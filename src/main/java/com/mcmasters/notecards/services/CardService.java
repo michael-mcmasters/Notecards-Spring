@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CardService {
 
-    public void saveCard(Card card);
+    public void createCard(Card card);
 }

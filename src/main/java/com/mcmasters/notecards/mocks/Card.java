@@ -1,16 +1,14 @@
 package com.mcmasters.notecards.mocks;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
 @Entity
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name= "frontText", columnDefinition="LONGTEXT")
     private String frontText;
@@ -30,11 +28,11 @@ public class Card {
         this.deck = deck;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

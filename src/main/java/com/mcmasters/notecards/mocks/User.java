@@ -10,8 +10,8 @@ import java.util.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "userName")
     private String userName;
@@ -22,9 +22,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})        // Cascade: When this pojo is saved in database, its child pojos are automatically saved to their databases.
     @JoinColumn(name = "deck_id")
-    @JsonBackReference
+    @JsonBackReference                             // Prevents recursive loop when pojos are mapped to one another. Without this, when pringtin JSON, user would show deck, which would show user, which would show deck, which would show user etc etc.
     private Set<Deck> decks;
 
     @Column(name = "badge")
@@ -46,11 +46,11 @@ public class User {
         this.badge = badge;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
