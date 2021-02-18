@@ -56,22 +56,6 @@ public class HomepageController {
 //        return ResponseEntity.ok().body(firstDeck.getCards());          // Return all cards in deck
 //    }
 
-//    @GetMapping("/")
-//    private ResponseEntity<Iterable<Homepage>> getCards() {
-//
-//        Homepage homepage = homepageService.findById(0L);
-//        if (homepage == null) {
-//            homepage = new Homepage();
-//            homepage.setId(0L);
-//            homepageService.save(homepage);
-//        }
-//        System.out.println("id is " + homepage.getId());
-//
-//        System.out.println("All homepages: " + homepageService.getAllHomepages());
-//        return ResponseEntity.ok().body(homepageService.getAllHomepages());
-//    }
-
-
     @GetMapping("/")
     private ResponseEntity<Iterable<Homepage>> getCards() {
 
