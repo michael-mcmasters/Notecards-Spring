@@ -33,18 +33,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Card getUsersCards() {
-//        Deck deck = new Deck();
-//        deck.addCards(new Card("first card front!", "back of card!", deck));
-//        deck.addCards(new Card("second card front!", "back of card!", deck));
-//        deck.addCards(new Card("third card front!", "back of card!", deck));
-//
-//        User user = getSampleUser();
-//        user.addDeck(deck);
-//
-//        userRepository.save(user);
-//        return deck.getCards().iterator().next();
+    public Set<Card> getUsersCards() {
+        Deck deck = new Deck();
+        deck.addCards(new Card("first card front!", "back of card!", deck));
+        deck.addCards(new Card("second card front!", "back of card!", deck));
+        deck.addCards(new Card("third card front!", "back of card!", deck));
 
-        return new Card("first card front!", "back of card!", new Deck());
+        User user = getSampleUser();
+        user.addDeck(deck);
+
+        //userRepository.save(user);
+        return deck.getCards();
+        //return deck.getCards().iterator().next();
+
+        //return new Card("first card front!", "back of card!", new Deck());
     }
 }

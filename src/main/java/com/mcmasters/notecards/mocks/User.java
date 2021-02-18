@@ -1,10 +1,13 @@
 package com.mcmasters.notecards.mocks;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "User")
+@JsonIgnoreProperties
 public class User {
 
     @Id
@@ -20,12 +23,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "deck_id")
+    @JsonIgnoreProperties("user")
     private Set<Deck> decks;
 
     @Column(name = "badge")
-    //private Set<String> badges;
     private String badge;
 
     @Column(name = "loggedOn")

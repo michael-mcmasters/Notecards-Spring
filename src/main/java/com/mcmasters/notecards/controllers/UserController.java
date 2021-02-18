@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 public class UserController {
 
@@ -31,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/cards")
-    public ResponseEntity<Card> getUserCard() {
+    public ResponseEntity<Set<Card>> getUserCard() {
 //         return ResponseEntity.ok().body(userService.getUsersCards());
          return ResponseEntity.ok().body(userService.getUsersCards());
     }
