@@ -9,7 +9,10 @@ import java.util.Set;
 
 @Service
 public interface UserService {
+
     public User getSampleUser();
+
     public Deck getUsersDecks();
+
     public Set<Card> getUsersCards();
 }
