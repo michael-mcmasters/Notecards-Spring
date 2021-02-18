@@ -28,6 +28,11 @@ public class Card {
         this.deck = deck;
     }
 
+
+
+
+
+
     public Long getId() {
         return id;
     }

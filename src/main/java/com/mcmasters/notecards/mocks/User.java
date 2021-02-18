@@ -1,6 +1,6 @@
 package com.mcmasters.notecards.mocks;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.*;
@@ -23,8 +23,8 @@ public class User {
     private String email;
 
     @OneToMany(cascade = {CascadeType.ALL})        // Cascade: When this pojo is saved in database, its child pojos are automatically saved to their databases.
+    @JsonManagedReference                          // Prevents recursive loop when pojos are mapped to one another. Without this, when pringtin JSON, user would show deck, which would show user, which would show deck, which would show user etc etc.
     @JoinColumn(name = "deck_id")
-    @JsonBackReference                             // Prevents recursive loop when pojos are mapped to one another. Without this, when pringtin JSON, user would show deck, which would show user, which would show deck, which would show user etc etc.
     private Set<Deck> decks;
 
     @Column(name = "badge")
@@ -45,6 +45,17 @@ public class User {
         this.decks = decks;
         this.badge = badge;
     }
+
+    public void addDeck(Deck... newDecks) {
+        for (Deck d : newDecks) {
+            decks.add(d);
+        }
+    }
+
+
+
+
+
 
     public Long getId() {
         return id;
@@ -84,13 +95,6 @@ public class User {
 
     public void setDecks(Set<Deck> decks) {
         this.decks = decks;
-    }
-
-    public void addDeck(Deck... newDecks) {
-//        Collections.addAll(decks, newDecks);
-        for (Deck d : newDecks) {
-            decks.add(d);
-        }
     }
 
     public boolean isLoggedOn() {
