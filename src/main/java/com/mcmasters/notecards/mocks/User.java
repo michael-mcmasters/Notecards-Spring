@@ -25,7 +25,7 @@ public class User {
     @OneToMany(cascade = {CascadeType.ALL})        // Cascade: When this pojo is saved in database, its child pojos are automatically saved to their databases.
     @JsonManagedReference                          // Prevents recursive loop when pojos are mapped to one another. Without this, when pringtin JSON, user would show deck, which would show user, which would show deck, which would show user etc etc.
     @JoinColumn(name = "deck_id")
-    private Set<Deck> decks;
+    private List<Deck> decks;
 
     @Column(name = "badge")
     private String badge;
@@ -35,10 +35,10 @@ public class User {
 
 
     public User() {
-        decks = new HashSet<>();
+        decks = new ArrayList<>();
     }
 
-    public User(String userName, String encryptedPswd, String email, Set<Deck> decks, String badge) {
+    public User(String userName, String encryptedPswd, String email, List<Deck> decks, String badge) {
         this.userName = userName;
         this.encryptedPswd = encryptedPswd;
         this.email = email;
@@ -89,11 +89,11 @@ public class User {
         this.email = email;
     }
 
-    public Set<Deck> getDecks() {
+    public List<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(Set<Deck> decks) {
+    public void setDecks(List<Deck> decks) {
         this.decks = decks;
     }
 

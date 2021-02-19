@@ -25,15 +25,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getSampleUser() {
-        User user = new User("ano", "money99", "brokebois@yahoo.net", new HashSet(), "badge1");
+        User user = new User("ano", "money99", "brokebois@yahoo.net", new ArrayList(), "badge1");
         userRepository.save(user);
         return user;
     }
 
     @Override
     public Set<User> getSetOfUsers() {
-        User user = new User("ano", "money99", "brokebois@yahoo.net", new HashSet(), "badge1");
-        User user1 = new User("wer", "few", "werfe2@yahoo.net", new HashSet(), "badge1342");
+        User user = new User("ano", "money99", "brokebois@yahoo.net", new ArrayList(), "badge1");
+        User user1 = new User("wer", "few", "werfe2@yahoo.net", new ArrayList(), "badge1342");
         userRepository.save(user);
         userRepository.save(user1);
         Set<User> set = new HashSet<>();

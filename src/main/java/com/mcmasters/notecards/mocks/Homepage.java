@@ -3,9 +3,7 @@ package com.mcmasters.notecards.mocks;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "homepage")
@@ -19,13 +17,13 @@ public class Homepage {
 
     @OneToMany (cascade = {CascadeType.ALL})
     @JsonManagedReference
-    private Set<Deck> decks;
+    private List<Deck> decks;
 
     public Homepage() {
-        decks = new HashSet<Deck>();
+        decks = new ArrayList<Deck>();
     }
 
-    public Homepage(Long id, Set<Deck> decks) {
+    public Homepage(Long id, ArrayList<Deck> decks) {
         this.id = id;
         this.decks = decks;
     }
@@ -57,11 +55,11 @@ public class Homepage {
         this.testName = testName;
     }
 
-    public Set<Deck> getDecks() {
+    public List<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(Set<Deck> decks) {
+    public void setDecks(List<Deck> decks) {
         this.decks = decks;
     }
 }

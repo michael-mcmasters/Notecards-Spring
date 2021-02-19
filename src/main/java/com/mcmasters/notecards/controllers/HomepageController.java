@@ -97,17 +97,15 @@ public class HomepageController {
         } else {
             System.out.println("Does exist");
             homepage = homepageService.findById(0L);
+            Deck deck = homepage.getDecks().get(0);
+            homepage.getDecks().get(0).getCards().get(0).setFrontText("Page refreshed. This card's title has been updated.");
         }
-
-//        System.out.println("All homepages: " + homepageService.getAllHomepages());
-//        return ResponseEntity.ok().body(homepageService.getAllHomepages());
-        Deck firstDeck = homepage.getDecks().iterator().next();         // Get users first deck
-        return ResponseEntity.ok().body(firstDeck.getCards());          // Return all cards in deck
+        return ResponseEntity.ok().body(homepage.getDecks().get(0).getCards());
     }
 
     private Deck getDefaultDeck() {
         Deck deck = new Deck();
-        deck.addCards(new Card(deck, "What are the 4 principles of Object Oriented Programming?", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation", "red"));
+        deck.addCards(new Card(deck, "What are the 4 principles of Object Oriented Programming?", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation", "orange"));
         deck.addCards(new Card(deck, "Explain abstraction", "Abstraction means using simple things to represent complexity. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets us avoid repeating the same work multiple times. It handles complexity by hiding unnecessary details from the user", "red"));
         deck.addCards(new Card(deck, "Explain polymorphism", "SAME NAME, MANY FORMS. This Java OOP concept lets programmers use the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables. TWO TYPES: Runtime , Polymorphism handled during runtime: example (Overriding) Static , Polymorphism handled in the compiler: example (Overloading)", "red"));
         deck.addCards(new Card(deck, "Explain inheritance", "This is a special feature of Object Oriented Programming in Java. It lets programmers create new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel. * The ability for a sub class to access the super class's members implicitly through the keyword 'extends'; Members include methods as well as variables."));
