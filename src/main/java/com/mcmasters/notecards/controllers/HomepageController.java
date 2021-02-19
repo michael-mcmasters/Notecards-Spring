@@ -3,6 +3,7 @@ package com.mcmasters.notecards.controllers;
 import com.mcmasters.notecards.mocks.Card;
 import com.mcmasters.notecards.mocks.Deck;
 import com.mcmasters.notecards.mocks.Homepage;
+import com.mcmasters.notecards.services.CardService;
 import com.mcmasters.notecards.services.DeckService;
 import com.mcmasters.notecards.services.HomepageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class HomepageController {
 
     @Autowired
     private DeckService deckService;
+
+    @Autowired
+    private CardService cardService;
 
 //    @Autowired
 //    public HomepageController(Homepage homepage, DeckService deckService) {
@@ -56,8 +60,27 @@ public class HomepageController {
 //        return ResponseEntity.ok().body(firstDeck.getCards());          // Return all cards in deck
 //    }
 
+//    @GetMapping("/")
+//    private ResponseEntity<Iterable<Homepage>> getCards() {
+//
+//        Homepage homepage;
+//        if (!homepageService.existsById(0L)) {
+//            System.out.println("Does not exist");
+//            homepage = new Homepage();
+//            homepage.setId(0L);
+//            homepage.setTestName("Waffle House");
+//            homepageService.save(homepage);
+//        } else {
+//            System.out.println("Does exist");
+//            homepage = homepageService.findById(0L);
+//        }
+//
+//        System.out.println("All homepages: " + homepageService.getAllHomepages());
+//        return ResponseEntity.ok().body(homepageService.getAllHomepages());
+//    }
+
     @GetMapping("/")
-    private ResponseEntity<Iterable<Homepage>> getCards() {
+    private ResponseEntity<Iterable<Card>> getCards() {
 
         Homepage homepage;
         if (!homepageService.existsById(0L)) {
@@ -65,13 +88,26 @@ public class HomepageController {
             homepage = new Homepage();
             homepage.setId(0L);
             homepage.setTestName("Waffle House");
+
+            Deck deck = new Deck();
+            Card card1 = new Card("first card!", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation", "red", deck);
+            Card card2 = new Card("Second card!", "Abstraction means using simple things to represent complexity. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets us avoid repeating the same work multiple times. It handles complexity by hiding unnecessary details from the user", "red", deck);
+            Card card3 = new Card("Third Card!", "SAME NAME, MANY FORMS. This Java OOP concept lets programmers use the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables. TWO TYPES: Runtime , Polymorphism handled during runtime: example (Overriding) Static , Polymorphism handled in the compiler: example (Overloading)", "red", deck);
+
+            deck.addCards(card1);
+            deck.addCards(card2);
+            deck.addCards(card3);
+            homepage.addDecks(deck);
+
             homepageService.save(homepage);
         } else {
             System.out.println("Does exist");
             homepage = homepageService.findById(0L);
         }
 
-        System.out.println("All homepages: " + homepageService.getAllHomepages());
-        return ResponseEntity.ok().body(homepageService.getAllHomepages());
+//        System.out.println("All homepages: " + homepageService.getAllHomepages());
+//        return ResponseEntity.ok().body(homepageService.getAllHomepages());
+        Deck firstDeck = homepage.getDecks().iterator().next();         // Get users first deck
+        return ResponseEntity.ok().body(firstDeck.getCards());          // Return all cards in deck
     }
 }

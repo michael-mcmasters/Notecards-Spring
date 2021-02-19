@@ -10,6 +10,9 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "backgroundColor")
+    private String backgroundColor;
+
     @Column(name= "frontText", columnDefinition="LONGTEXT")
     private String frontText;
 
@@ -22,9 +25,17 @@ public class Card {
 
     public Card() {}
 
+    public Card(String frontText, String backText, String backgroundColor, Deck deck) {
+        this.frontText = frontText;
+        this.backText = backText;
+        this.backgroundColor = backgroundColor;
+        this.deck = deck;
+    }
+
     public Card(String frontText, String backText, Deck deck) {
         this.frontText = frontText;
         this.backText = backText;
+        this.backgroundColor = "green";
         this.deck = deck;
     }
 
@@ -55,6 +66,14 @@ public class Card {
 
     public void setBackText(String backText) {
         this.backText = backText;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     public Deck getDeck() {
