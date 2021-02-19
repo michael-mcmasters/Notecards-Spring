@@ -25,14 +25,14 @@ public class Card {
 
     public Card() {}
 
-    public Card(String frontText, String backText, String backgroundColor, Deck deck) {
+    public Card(Deck deck, String frontText, String backText, String backgroundColor) {
         this.frontText = frontText;
         this.backText = backText;
         this.backgroundColor = backgroundColor;
         this.deck = deck;
     }
 
-    public Card(String frontText, String backText, Deck deck) {
+    public Card(Deck deck, String frontText, String backText) {
         this.frontText = frontText;
         this.backText = backText;
         this.backgroundColor = "green";
