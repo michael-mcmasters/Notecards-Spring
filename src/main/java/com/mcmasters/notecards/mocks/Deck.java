@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,13 +31,13 @@ public class Deck {
     @OneToMany(cascade = {CascadeType.ALL})
     @JsonManagedReference
     @JoinColumn(name = "deck_id")
-    private Set<Card> cards;
+    private List<Card> cards;
 
     public Deck() {
-        this.cards = new HashSet<>();
+        this.cards = new ArrayList<>();
     }
 
-    public Deck(Set<Card> cards) {
+    public Deck(ArrayList<Card> cards) {
         this.cards = cards;
     }
 
@@ -82,11 +84,11 @@ public class Deck {
         this.category = category;
     }
 
-    public Set<Card> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
 
-    public void setCards(Set<Card> cards) {
+    public void setCards(List<Card> cards) {
         this.cards = cards;
     }
 }

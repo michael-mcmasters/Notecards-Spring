@@ -7,7 +7,9 @@ import com.mcmasters.notecards.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -46,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<Card> getUsersCards() {
+    public List<Card> getUsersCards() {
 //        Deck deck = new Deck();
 //
 //        CardService cardService = new CardServiceImpl();

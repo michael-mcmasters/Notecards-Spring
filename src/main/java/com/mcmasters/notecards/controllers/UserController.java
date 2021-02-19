@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -44,7 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/cards")
-    public ResponseEntity<Set<Card>> getUserCard() {
+    public ResponseEntity<List<Card>> getUserCard() {
         User user = new User();
         Deck deck = new Deck();
         deck.addCards(new Card(deck, "What are the 4 principles of Object Oriented Programming?", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation"));

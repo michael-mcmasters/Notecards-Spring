@@ -5,6 +5,8 @@ import com.mcmasters.notecards.mocks.Deck;
 import com.mcmasters.notecards.mocks.User;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,7 +20,7 @@ public interface UserService {
 
     public Deck getUsersDecks();
 
-    public Set<Card> getUsersCards();
+    public List<Card> getUsersCards();
 
     public Set<Card> getUsersCards(User user);
 }
