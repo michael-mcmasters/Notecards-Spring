@@ -11,10 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 @RestController
 public class HomepageController {
 
@@ -27,83 +23,51 @@ public class HomepageController {
     @Autowired
     private CardService cardService;
 
-//    @Autowired
-//    public HomepageController(Homepage homepage, DeckService deckService) {
-//        this.homepage = homepage;
-//        this.deckService = deckService;
-//    }
-
-//    @GetMapping("/")
-//    private ResponseEntity<Set<Card>> getCards() {
-//
-//        System.out.println("All homepages: " + homepageService.getAllHomepages());
-//
-//        Homepage homepage = homepageService.findById(0L);
-//        if (homepage == null) {
-//            homepage = new Homepage();
-//            homepage.setId(0L);
-//            homepageService.save(homepage);
-//        }
-//        System.out.println("id is " + homepage.getId());
-//
-//        if (homepage.getDecks().size() == 0) {
-//            System.out.println(homepage.getDecks().size());
-//            Deck deck = new Deck();
-//            deck.addCards(new Card("first card!", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation", deck));
-//            deck.addCards(new Card("Explain abstraction", "Abstraction means using simple things to represent complexity. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets us avoid repeating the same work multiple times. It handles complexity by hiding unnecessary details from the user", deck));
-//            deck.addCards(new Card("Explain polymorphism", "SAME NAME, MANY FORMS. This Java OOP concept lets programmers use the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables. TWO TYPES: Runtime , Polymorphism handled during runtime: example (Overriding) Static , Polymorphism handled in the compiler: example (Overloading)", deck));
-//            homepage.addDecks(deck);
-//
-//            deckService.createDeck(deck);
-//            homepageService.save(homepage);
-//        }
-//
-//        Deck firstDeck = homepage.getDecks().iterator().next();         // Get users first deck
-//        return ResponseEntity.ok().body(firstDeck.getCards());          // Return all cards in deck
-//    }
-
-//    @GetMapping("/")
-//    private ResponseEntity<Iterable<Homepage>> getCards() {
-//
-//        Homepage homepage;
-//        if (!homepageService.existsById(0L)) {
-//            System.out.println("Does not exist");
-//            homepage = new Homepage();
-//            homepage.setId(0L);
-//            homepage.setTestName("Waffle House");
-//            homepageService.save(homepage);
-//        } else {
-//            System.out.println("Does exist");
-//            homepage = homepageService.findById(0L);
-//        }
-//
-//        System.out.println("All homepages: " + homepageService.getAllHomepages());
-//        return ResponseEntity.ok().body(homepageService.getAllHomepages());
-//    }
-
     @GetMapping("/")
-    private ResponseEntity<Iterable<Card>> getCards() {
+    private String getHome() {
+        return "<div style='width: fit-content; margin-left: auto; margin-right: auto;'>" +
+                "<p>Welcome to my API. It is still a work in progress. Here are some URIs to look at in the mean time.</p>" +
+                "<p>/core-java-deck, /spanish-deck, /state-capitals-deck</p>" +
+                "</div>";
+    }
 
-        Homepage homepage;
-        if (!homepageService.existsById(0L)) {
-            System.out.println("Does not exist");
-            homepage = new Homepage();
-            homepage.setId(0L);
-            homepage.setTestName("Waffle House");
-
-            Deck deck = getDefaultDeck();
-            homepage.addDecks(deck);
-            homepageService.save(homepage);
-        } else {
-            System.out.println("Does exist");
-            homepage = homepageService.findById(0L);
-            Deck deck = homepage.getDecks().get(0);
-            homepage.getDecks().get(0).getCards().get(0).setFrontText("Page refreshed. This card's title has been updated.");
-        }
+    @GetMapping("/core-java-deck")
+    private ResponseEntity<Iterable<Card>> getCoreJavaDeck() {
+        Homepage homepage = getHomePage();
         return ResponseEntity.ok().body(homepage.getDecks().get(0).getCards());
     }
 
-    private Deck getDefaultDeck() {
+    @GetMapping("/spanish-deck")
+    private ResponseEntity<Iterable<Card>> getSpanishDeck() {
+        Homepage homepage = getHomePage();
+        return ResponseEntity.ok().body(homepage.getDecks().get(1).getCards());
+    }
+
+    @GetMapping("/state-capitals-deck")
+    private ResponseEntity<Iterable<Card>> getStateCapitalsDeck() {
+        Homepage homepage = getHomePage();
+        return ResponseEntity.ok().body(homepage.getDecks().get(2).getCards());
+    }
+
+    private Homepage getHomePage() {
+        long id = 0L;
+        if (!homepageService.existsById(id))
+            createHomepage(id);
+
+        Homepage homepage = homepageService.findById(id);
+        return homepage;
+    }
+
+    // Creates homepage and adds decks to it.
+    private Homepage createHomepage(long id) {
+        Homepage homepage = new Homepage();
+        homepage.setId(id);
+        homepage.addDecks(createCoreJavaDeck(), createSpanishDeck(), createStateCapitalsDeck());
+        homepageService.save(homepage);
+        return homepage;
+    }
+
+    private Deck createCoreJavaDeck() {
         Deck deck = new Deck();
         deck.addCards(new Card(deck, "What are the 4 principles of Object Oriented Programming?", "A PIE. Abstraction, Polymorphism, Inheritance, Encapsulation", "orange"));
         deck.addCards(new Card(deck, "Explain abstraction", "Abstraction means using simple things to represent complexity. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets us avoid repeating the same work multiple times. It handles complexity by hiding unnecessary details from the user", "red"));
@@ -178,6 +142,18 @@ public class HomepageController {
         deck.addCards(new Card(deck, "What is a thread?", "The path followed when executing a program; all programs have at least 1 thread (known as the main thread)"));
         deck.addCards(new Card(deck, "What is an advantage of Java (with its JVM) over other languages that work from the hardware?", "The JVM can be run on any platform, making it dynamic. C++, for instance, runs on the hardware, so it is not dynamic."));
         deck.addCards(new Card(deck, "What does the word static mean?", "In Java, a static member is a member of a class that isn’t associated with an instance of a class. Instead, the member belongs to the class itself. As a result, you can access the static member without first creating a class instance."));
+        return deck;
+    }
+
+    private Deck createSpanishDeck() {
+        Deck deck = new Deck();
+        deck.addCards(new Card(deck, "Hola", "Hello"));
+        return deck;
+    }
+
+    private Deck createStateCapitalsDeck() {
+        Deck deck = new Deck();
+        deck.addCards(new Card(deck, "Delaware", "Dover"));
         return deck;
     }
 }

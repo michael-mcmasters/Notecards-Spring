@@ -6,14 +6,11 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "homepagee")
+@Table(name = "homepage")
 public class Homepage {
 
     @Id
     private Long id;
-
-    @Column(name = "testName")
-    private String testName;
 
     @OneToMany (cascade = {CascadeType.ALL})
     @JsonManagedReference
@@ -45,14 +42,6 @@ public class Homepage {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTestName() {
-        return testName;
-    }
-
-    public void setTestName(String testName) {
-        this.testName = testName;
     }
 
     public List<Deck> getDecks() {
